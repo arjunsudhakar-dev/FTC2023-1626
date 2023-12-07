@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="Mecanum Drive", group="Iterative Opmode")
 public class Mecanum extends OpMode {
 
+    private boolean opmodeactive = false;
     // declare and initialize four DcMotors.
     private DcMotor front_left  = null;
     private DcMotor front_right = null;
@@ -28,7 +29,7 @@ public class Mecanum extends OpMode {
     int elevatorZero=0;
     @Override
     public void init() {
-
+        opmodeactive = true;
         // Name strings must match up with the config on the Robot Controller
         // app.
         front_left   = hardwareMap.get(DcMotor.class, "motor0");
@@ -67,10 +68,27 @@ public class Mecanum extends OpMode {
             twist  = gamepad2.left_stick_x;
         }
         else{
-            drive = gamepad2.right_stick_x*0.5;
-            strafe  = gamepad2.left_stick_y*0.5;
-            twist  = gamepad2.left_stick_x*0.5;
+            drive = gamepad2.right_stick_x*0.4;
+            strafe  = gamepad2.left_stick_y*0.4;
+            twist  = gamepad2.left_stick_x*0.4;
         }
+
+        if(gamepad2.dpad_left) {
+            double startTime = getRuntime();
+
+            while(opmodeactive && (getRuntime() - startTime) < 1.0) {
+                front_left.setPower(1.0);
+                front_right.setPower(1.0);
+                back_left.setPower(-1.0);
+                back_right.setPower(-1.0);
+            }
+            front_left.setPower(0);
+            front_right.setPower(0);
+            back_left.setPower(0);
+            back_right.setPower(0);
+
+        }
+
 
         //Elbow - motor xy
         if(gamepad1.y){
@@ -85,8 +103,8 @@ public class Mecanum extends OpMode {
         }
 
         //Rotator - motor
-        if(gamepad1.left_stick_x>0.05||gamepad1.left_stick_x<-0.05){
-            rotator.setPower(gamepad1.left_stick_x*0.4);
+        if(gamepad1.left_stick_y>0.05||gamepad1.left_stick_y<-0.05){
+            rotator.setPower(gamepad1.left_stick_y*0.4);
         }
         else{
             rotator.setPower(0);
@@ -112,7 +130,6 @@ public class Mecanum extends OpMode {
         else{
             shooter.setPosition(0);
         }
-
 
 
         // You may need to multiply some of these by -1 to invert direction of
