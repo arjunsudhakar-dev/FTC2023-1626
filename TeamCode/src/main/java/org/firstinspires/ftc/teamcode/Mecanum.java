@@ -77,10 +77,11 @@ public class Mecanum extends OpMode {
             double startTime = getRuntime();
 
             while(opmodeactive && (getRuntime() - startTime) < 1.0) {
-                front_left.setPower(1.0);
-                front_right.setPower(1.0);
-                back_left.setPower(-1.0);
-                back_right.setPower(-1.0);
+                // Consider the following int changes:
+                front_left.setPower(1.0);   // -1
+                front_right.setPower(1.0);  // -1
+                back_left.setPower(-1.0);   // -1
+                back_right.setPower(-1.0);  //  1
             }
             front_left.setPower(0);
             front_right.setPower(0);
