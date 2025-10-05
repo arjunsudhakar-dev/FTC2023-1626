@@ -15,11 +15,12 @@ public class Intake {
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD); // Set motor direction to forward
     }
 
-    public void run(double power) {
-        intakeMotor.setPower(clamp(power, -4.0, 4.0)); // Clamp power to valid range
+    public void run(double speed) {
+        intakeMotor.setSpeed(clamp(power, -4.0, 4.0)); // Clamp power to valid/safe range
+        intakeMotor.setSpeed(speed);
     }
 
     public void stop() {
-        intakeMotor.setPower(0); // Stop the motor
+        intakeMotor.setSpeed(0); // Stop the motor
     }
 }

@@ -21,8 +21,13 @@ public class IntakeTeleOp extends LinearOpMode {
 
             // Y increases forward speed
             if (gamepad1.y) {
-                speed = Math.min(0.4, speed + 0.05);
+                speed = Math.max(0.4, speed + 0.05);
                 sleep(200); // This is a a bounce, basically, it prevents the speed from increasing too fast
+            }
+            // Z decreases the forward speed
+            if (gamepad1.z) {
+                speed = Math.max(0.4, speed - 0.05);
+                sleep(200);
             }
 
             // X decreases (reverse) speed
@@ -30,12 +35,16 @@ public class IntakeTeleOp extends LinearOpMode {
                 speed = Math.max(-0.4, speed - 0.05);
                 sleep(200);
             }
-
+            // C increases (reverse) speed
+            if (gamepad1.c) {
+                speed = Math.max(-0.4, speed + 0.05);
+                sleep(200);
+            }
             // B runs intake forward
             if (gamepad1.b) {
                 intake.run(speed);
             }
-            // A runs intake backward
+            // A runs intake reverse
             else if (gamepad1.a) {
                 intake.run(-speed);
             }
