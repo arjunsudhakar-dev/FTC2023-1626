@@ -19,7 +19,7 @@ public class MecanumDrive extends Opmode {
     DC LBmotor;
 
     public boid moveDrivetrain() {
-        double horizontal = 0; // Left and righ
+        double horizontal = 0; // Left and right
         double pivot = 0; // Steer our robot, aka rotate the robot in place
         double vertical = 0; // Up and down
         vetical = -gamepad1.left_stick_y; // Gamepad time!
