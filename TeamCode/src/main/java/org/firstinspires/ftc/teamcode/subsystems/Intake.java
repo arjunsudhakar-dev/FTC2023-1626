@@ -11,13 +11,14 @@ public class Intake {
     private final DcMotor intakeMotor;
 
     public Intake(HardwareMap hardwareMap) {
-        intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+        intakeMotor = hardwareMap.get(DcMotor.class, "Intake");
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD); // TODO: test this
     }
 
+
     public void run(double power) {
         // clamp power to safe range
-        double safePower = Math.max(-0.5, Math.min(0.5, power));
+        double safePower = Math.max(-0.6, Math.min(0.6, power));
         intakeMotor.setPower(safePower); // Had to change setSpeed to setPower
     }
 
@@ -25,3 +26,4 @@ public class Intake {
         intakeMotor.setPower(0);
     }
 }
+// Feeder motor: "Black"

@@ -8,17 +8,12 @@ import math.util.clamp; // Import clamp function for limiting power values
 
 public class Shooter {
     private final DcMotor shooterMotor1;
-    private final DcMotor shooterMotor2;
 
     private final ElapsedTime runtime = new ElapsedTime(); // Timer for controlling firing intervals
 
     public Shooter(HardwareMap hardwareMap) {
-        shooterMotor1 = hardwareMap.get(DcMotor.class, "shooterMotor");
+        shooterMotor1 = hardwareMap.get(DcMotor.class, "G2B2");
         shooterMotor1.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        shooterMotor2 = hardwareMap.get(DcMotor.class, "shooterMotor");
-        shooterMotor2.setDirection(DcMotorSimple.Direction.REVERSE);
-
     }
 
     // Clamp power to valid/safe range

@@ -1,10 +1,11 @@
+// We need to make this extend opMode, not linearOpMode 
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 
-@TeleOp(name = "Intake TeleOp", group = "TeleOp")
+@TeleOp(name = "Intake TeleOp | Arjun's code", group = "TeleOp")
 public class IntakeTeleOp extends LinearOpMode {
 
     // The Intake subsystem that controls the pulley-powered roller
@@ -12,7 +13,7 @@ public class IntakeTeleOp extends LinearOpMode {
 
     // Adjustable motor power (strength of pulley/roller spin)
     // Represents the magnitude of how hard the rollers pull the ball.
-    private double power = 0.2; // start at 20%
+    private double power = 0.6; // start at 60%
 
     @Override
     public void runOpMode() {
@@ -25,28 +26,17 @@ public class IntakeTeleOp extends LinearOpMode {
 
         // Main TeleOp loop — runs repeatedly during the match
         while (opModeIsActive()) {
-
+            // Math.min keeps values below a max. Math.max keeps values above a min
             // Press Y to increase intake power (spin rollers faster)
-            if (gamepad1.y) {
-                power = Math.min(power + 0.05, 0.5); // cap at 0.5 power
-                sleep(150); // debounce so it doesn’t jump too fast
-            }
-
-            // Press X to decrease intake power (spin rollers slower)
-            if (gamepad1.x) {
-                power = Math.max(power - 0.05, 0.1); // minimum 0.1 power
-                sleep(150);
-            }
-
             // Press B to run intake forward (suck balls in)
             // This spins motor → pulley → belt → roller → intake wheels INWARDS
-            if (gamepad1.b) {
+            if (gamepad1.left_trigger) {
                 intake.run(power);
             }
 
             // Press A to run intake in reverse (spit balls out)
             // This reverses the entire pulley system
-            else if (gamepad1.a) {
+            else if (gamepad1.left_bumper) {
                 intake.run(-power);
             }
 
